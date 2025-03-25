@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phishing Detector</title>
+    <script>
+        async function scanEmails() {
+            const response = await fetch('/scan');
+            const data = await response.json();
+            let results = document.getElementById("results");
+            results.innerHTML = "";
+            data.forEach(email => {
+                results.innerHTML += `<p><strong>Sender:</strong> ${email.sender} | <strong>Subject:</strong> ${email.subject} | <strong>Score:</strong> ${email.phishing_score.toFixed(2)}</p>`;
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>AI-Powered Phishing Detector</h1>
+    <button onclick="scanEmails()">Scan Emails</button>
+    <div id="results"></div>
+</body>
+</html>
